@@ -1,14 +1,13 @@
 /* local imports: common */
 import * as types from './../types';
 
-export const login = userData => ({
-	type: types.LOGIN,
-	payload: userData,
-});
+/* root imports: common */
+import { services } from 'config/services';
+import { setInProgress } from 'actions/auth';
 
-export const loginOnSuccess = user => ({
+export const loginOnSuccess = payload => ({
 	type: types.LOGIN_ON_SUCCESS,
-	payload: user,
+	payload,
 });
 
 export const loginOnFail = error => ({
@@ -16,3 +15,18 @@ export const loginOnFail = error => ({
 	payload: error,
 	error: true,
 });
+
+export const login = payload => async (dispatch, getState) => {
+	dispatch(setInProgress(true));
+
+	try {
+		const user = await services.auth.login(payload);
+
+		dispatch(loginOnSuccess(user));
+		// history.push('/');
+	} catch (e) {
+		dispatch(loginOnFail(e.message));
+	} finally {
+		dispatch(setInProgress(false));
+	}
+};

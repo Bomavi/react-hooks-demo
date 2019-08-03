@@ -1,9 +1,9 @@
 /* local imports: common */
 import * as types from './../types';
 
-export const logout = () => ({
-	type: types.LOGOUT,
-});
+/* root imports: common */
+import { services } from 'config/services';
+import { setInProgress } from 'actions/auth';
 
 export const logoutOnSuccess = id => ({
 	type: types.LOGOUT_ON_SUCCESS,
@@ -15,3 +15,17 @@ export const logoutOnFail = error => ({
 	payload: error,
 	error: true,
 });
+
+export const logout = () => async (dispatch, getState) => {
+	dispatch(setInProgress(true));
+
+	try {
+		const id = await services.auth.logout();
+
+		dispatch(logoutOnSuccess(id));
+	} catch (e) {
+		dispatch(logoutOnFail(e.message));
+	} finally {
+		dispatch(setInProgress(false));
+	}
+};

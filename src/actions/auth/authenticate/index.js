@@ -1,13 +1,13 @@
 /* local imports: common */
 import * as types from './../types';
 
-export const authenticate = () => ({
-	type: types.AUTHENTICATE,
-});
+/* root imports: common */
+import { services } from 'config/services';
+import { setIsInitialized } from 'actions/auth';
 
-export const authenticateOnSuccess = user => ({
+export const authenticateOnSuccess = payload => ({
 	type: types.AUTHENTICATE_ON_SUCCESS,
-	payload: user,
+	payload,
 });
 
 export const authenticateOnFail = error => ({
@@ -15,3 +15,15 @@ export const authenticateOnFail = error => ({
 	payload: error,
 	error: true,
 });
+
+export const authenticate = () => async (dispatch, getState) => {
+	try {
+		const user = await services.auth.authenticate();
+
+		dispatch(authenticateOnSuccess(user));
+	} catch (e) {
+		dispatch(authenticateOnFail(e.message));
+	} finally {
+		dispatch(setIsInitialized(true));
+	}
+};
