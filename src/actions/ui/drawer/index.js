@@ -1,7 +1,7 @@
 /* local imports: common */
 import * as types from './../types';
 
-export const toggleDrawer = (isOpen = null) => ({
+export const toggleDrawer = (payload = null) => ({
 	type: types.TOGGLE_DRAWER,
-	payload: isOpen,
+	payload,
 });
