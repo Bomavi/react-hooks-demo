@@ -1,7 +1,7 @@
 /* local imports: common */
 import * as types from './../types';
 
-export const searchTasks = search => ({
+export const searchTasks = payload => ({
 	type: types.SEARCH_TASKS,
-	payload: search,
+	payload,
 });

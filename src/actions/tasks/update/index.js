@@ -1,17 +1,13 @@
 /* local imports: common */
 import * as types from './../types';
 
-export const updateTask = (id, data) => ({
-	type: types.UPDATE_TASK,
-	payload: {
-		id,
-		data,
-	},
-});
+/* root imports: common */
+import { services } from 'config/services';
+import { setUpdateInProgress } from 'actions/tasks';
 
-export const updateTaskOnSuccess = task => ({
+export const updateTaskOnSuccess = payload => ({
 	type: types.UPDATE_TASK_ON_SUCCESS,
-	payload: task,
+	payload,
 });
 
 export const updateTaskOnFail = error => ({
@@ -19,3 +15,17 @@ export const updateTaskOnFail = error => ({
 	payload: error,
 	error: true,
 });
+
+export const updateTask = (id, payload) => async (dispatch, getState) => {
+	dispatch(setUpdateInProgress(id, true));
+
+	try {
+		const task = await services.api.tasks.update(id, payload);
+
+		dispatch(updateTaskOnSuccess(task));
+	} catch (e) {
+		dispatch(updateTaskOnFail(e.message));
+	} finally {
+		dispatch(setUpdateInProgress(id, false));
+	}
+};

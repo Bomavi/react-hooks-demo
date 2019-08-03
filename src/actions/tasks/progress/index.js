@@ -1,14 +1,14 @@
 /* local imports: common */
 import * as types from './../types';
 
-export const setIsFetching = isFetching => ({
+export const setIsFetching = payload => ({
 	type: types.SET_IS_FETCHING,
-	payload: isFetching,
+	payload,
 });
 
-export const setInProgress = inProgress => ({
+export const setInProgress = payload => ({
 	type: types.SET_IN_PROGRESS,
-	payload: inProgress,
+	payload,
 });
 
 export const setUpdateInProgress = (id, inProgress) => ({

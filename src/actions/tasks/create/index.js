@@ -1,14 +1,13 @@
 /* local imports: common */
 import * as types from './../types';
 
-export const createTask = task => ({
-	type: types.CREATE_TASK,
-	payload: task,
-});
+/* root imports: common */
+import { services } from 'config/services';
+import { setInProgress } from 'actions/tasks';
 
-export const createTaskOnSuccess = task => ({
+export const createTaskOnSuccess = payload => ({
 	type: types.CREATE_TASK_ON_SUCCESS,
-	payload: task,
+	payload,
 });
 
 export const createTaskOnFail = error => ({
@@ -16,3 +15,17 @@ export const createTaskOnFail = error => ({
 	payload: error,
 	error: true,
 });
+
+export const createTask = payload => async (dispatch, getState) => {
+	dispatch(setInProgress(true));
+
+	try {
+		const task = await services.api.tasks.create(payload);
+
+		dispatch(createTaskOnSuccess(task));
+	} catch (e) {
+		dispatch(createTaskOnFail(e.message));
+	} finally {
+		dispatch(setInProgress(false));
+	}
+};
