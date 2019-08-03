@@ -1,0 +1,50 @@
+{
+  "name": "react-redux-without-typescript",
+  "version": "1.0.0",
+  "author": "Maksym Bozhenov <max.bozh.n1mbo@gmail.com>",
+  "scripts": {
+    "start": "BROWSER=none PORT=80 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.2.0",
+    "@reach/router": "^1.2.1",
+    "axios": "^0.19.0",
+    "classnames": "^2.2.6",
+    "date-fns": "^1.30.1",
+    "framer-motion": "^1.4.2",
+    "prop-types": "^15.7.2",
+    "query-string": "^6.8.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-react-app": "^4.0.1",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2",
+    "react-scripts": "3.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
