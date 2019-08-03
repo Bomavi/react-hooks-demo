@@ -1,7 +1,7 @@
 /* local imports: common */
 import * as types from './../types';
 
-export const changeSelectedThemeType = theme => ({
+export const changeSelectedThemeType = payload => ({
 	type: types.CHANGE_SELECTED_THEME_TYPE,
-	payload: theme,
+	payload,
 });

@@ -1,7 +1,23 @@
-/* local imports: common */
-import * as types from './../types';
+/* root imports: common */
+import { services } from 'config/services';
+import { setThemeInProgress } from 'actions/theme';
+import { updateUserOnSuccess, updateUserOnFail } from 'actions/user';
 
-export const switchTheme = theme => ({
-	type: types.SWITCH_THEME,
-	payload: theme,
-});
+export const switchTheme = payload => async (dispatch, getState) => {
+	dispatch(setThemeInProgress(true));
+
+	try {
+		const state = getState();
+		const currentUser = state.auth.user;
+
+		if (!currentUser) throw new Error('no user found');
+
+		const updatedUser = await services.api.users.update(currentUser._id, payload);
+
+		dispatch(updateUserOnSuccess(updatedUser));
+	} catch (e) {
+		dispatch(updateUserOnFail(e.message));
+	} finally {
+		dispatch(setThemeInProgress(false));
+	}
+};
