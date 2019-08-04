@@ -8,7 +8,7 @@ import HELP from 'assets/icons/help';
 /* local imports: common */
 import { useStyles } from './styles';
 
-const Icon = ({ name, size = 'sm', svgSize = 'sm', color }) => {
+const Icon = React.memo(({ name, size = 'sm', svgSize = 'sm', color }) => {
 	const SVG = React.lazy(() => import(`assets/icons/${name}`));
 	const classes = useStyles({ color });
 
@@ -21,6 +21,6 @@ const Icon = ({ name, size = 'sm', svgSize = 'sm', color }) => {
 			</div>
 		</div>
 	);
-};
+});
 
 export { Icon };
