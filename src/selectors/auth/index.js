@@ -5,8 +5,6 @@ import { createSelector } from 'reselect';
 import { history } from 'config/history';
 import { lightTheme, darkTheme } from 'utils/themes';
 
-// const { pathname } = history.location;
-
 const authSelector = state => state.auth;
 const userSelector = state => state.auth.user;
 const themeSelector = state => state.auth.theme.selectedThemeType;
