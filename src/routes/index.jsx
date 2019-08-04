@@ -1,13 +1,14 @@
 /* npm imports: common */
 import React from 'react';
 import { connect } from 'react-redux';
-import { Router, Redirect } from '@reach/router';
+import { Router, Switch, Route, Redirect } from 'react-router';
 
 /* root imports: view components */
 import { Login } from 'features/Login';
 import { Home } from 'features/Home';
 
 /* root imports: common */
+import { history } from 'config/history';
 import {
 	getAccessibleOnlyForAuthorized,
 	getAccessibleOnlyForUnauthorized,
@@ -30,11 +31,15 @@ const RoutesComponent = ({
 	notAccessibleForAuthorized,
 	notAccessibleForUnauthorized,
 }) => (
-	<Router>
-		{accessibleOnlyForAuthorized && <Home path="/" />}
-		{accessibleOnlyForUnauthorized && <Login path="login" />}
-		{notAccessibleForAuthorized && <Redirect to="/" />}
-		{notAccessibleForUnauthorized && <Redirect to="login" />}
+	<Router history={history}>
+		<Switch>
+			{accessibleOnlyForAuthorized && <Route exact path="/" component={Home} />}
+			{accessibleOnlyForUnauthorized && (
+				<Route exact path="/login" component={Login} />
+			)}
+			{notAccessibleForAuthorized && <Redirect to="/" />}
+			{notAccessibleForUnauthorized && <Redirect to="/login" />}
+		</Switch>
 	</Router>
 );
 
