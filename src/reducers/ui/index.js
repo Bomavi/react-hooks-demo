@@ -11,7 +11,7 @@ export const ui = (state = initialState, action) => {
 			const isOpen = action.payload;
 			return {
 				...state,
-				isDrawerOpen: isOpen && isOpen !== null ? isOpen : !state.isDrawerOpen,
+				isDrawerOpen: isOpen || isOpen !== null ? isOpen : !state.isDrawerOpen,
 			};
 		}
 
