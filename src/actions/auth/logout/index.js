@@ -2,6 +2,7 @@
 import * as types from './../types';
 
 /* root imports: common */
+import { history } from 'config/history';
 import { services } from 'config/services';
 import { setInProgress } from 'actions/auth';
 
@@ -23,6 +24,7 @@ export const logout = () => async (dispatch, getState) => {
 		const id = await services.auth.logout();
 
 		dispatch(logoutOnSuccess(id));
+		history.push('/login');
 	} catch (e) {
 		dispatch(logoutOnFail(e.message));
 	} finally {

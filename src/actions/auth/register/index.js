@@ -1,4 +1,5 @@
 /* local imports: common */
+import { history } from 'config/history';
 import * as types from './../types';
 
 /* root imports: common */
@@ -23,7 +24,7 @@ export const register = payload => async (dispatch, getState) => {
 		const user = await services.auth.register(payload);
 
 		dispatch(registerOnSuccess(user));
-		// history.push('/');
+		history.push('/');
 	} catch (e) {
 		dispatch(registerOnFail(e.message));
 	} finally {
