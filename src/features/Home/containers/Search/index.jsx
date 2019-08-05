@@ -15,12 +15,19 @@ import { searchTasks, fetchTasks } from 'actions/tasks';
 const Search = () => {
 	// const classes = useStyles();
 	const dispatch = useDispatch();
+	const isInitialized = React.useRef(false);
+	const prevSearch = React.useRef('');
 
 	const isFetching = useSelector(state => state.tasks.isFetching);
 
 	const changeHandler = useCallback(
 		debounce(value => {
-			searchHandler(value);
+			if (!isInitialized.current && value === '') {
+				isInitialized.current = true;
+			} else if (value !== prevSearch.current) {
+				prevSearch.current = value;
+				searchHandler(value);
+			}
 		}, debounceTiming.input),
 		[]
 	);
@@ -35,7 +42,7 @@ const Search = () => {
 
 	useEffect(() => {
 		return () => {
-			searchHandler('');
+			if (prevSearch.current !== '') searchHandler('');
 		};
 	}, [searchHandler]);
 
