@@ -1,5 +1,5 @@
 /* npm imports: common */
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 /* root imports: view components */
@@ -12,20 +12,20 @@ import { searchTasks, fetchTasks } from 'actions/tasks';
 /* local imports: common */
 // import { useStyles } from './styles';
 
-const Search = React.memo(() => {
+const Search = () => {
 	// const classes = useStyles();
 	const dispatch = useDispatch();
 
 	const isFetching = useSelector(state => state.tasks.isFetching);
 
-	const changeHandler = React.useCallback(
+	const changeHandler = useCallback(
 		debounce(value => {
 			searchHandler(value);
 		}, debounceTiming.input),
 		[]
 	);
 
-	const searchHandler = React.useCallback(
+	const searchHandler = useCallback(
 		payload => {
 			dispatch(searchTasks(payload));
 			dispatch(fetchTasks());
@@ -33,7 +33,7 @@ const Search = React.memo(() => {
 		[dispatch]
 	);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		return () => {
 			searchHandler('');
 		};
@@ -50,6 +50,6 @@ const Search = React.memo(() => {
 			onChange={changeHandler}
 		/>
 	);
-});
+};
 
 export { Search };

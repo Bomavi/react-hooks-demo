@@ -7,7 +7,7 @@ import { CustomInput } from 'views/elements';
 /* local imports: common */
 import { useStyles } from './styles';
 
-const EditInput = React.memo(props => {
+const EditInput = props => {
 	const classes = useStyles();
 
 	return (
@@ -22,6 +22,6 @@ const EditInput = React.memo(props => {
 			/>
 		</div>
 	);
-});
+};
 
 export { EditInput };

@@ -1,5 +1,5 @@
 /* npm imports: common */
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 
@@ -18,7 +18,7 @@ import { getSortedTasks, getTasksIsEmpty, getTasksLenth } from 'selectors';
 /* local imports: common */
 import { useStyles } from './styles';
 
-const TaskList = React.memo(() => {
+const TaskList = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
@@ -27,12 +27,12 @@ const TaskList = React.memo(() => {
 	const isEmpty = useSelector(state => getTasksIsEmpty(state));
 	const tasksLength = useSelector(state => getTasksLenth(state));
 
-	const sortTasksHandler = React.useCallback(() => {
+	const sortTasksHandler = useCallback(() => {
 		if (sortKey === 'asc') dispatch(sortTasks('desc'));
 		if (sortKey === 'desc') dispatch(sortTasks('asc'));
 	}, [dispatch, sortKey]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		dispatch(fetchTasks());
 	}, [dispatch]);
 
@@ -60,6 +60,6 @@ const TaskList = React.memo(() => {
 				: 'no tasks'}
 		</Paper>
 	);
-});
+};
 
 export { TaskList };

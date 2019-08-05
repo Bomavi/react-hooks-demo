@@ -1,5 +1,5 @@
 /* npm imports: common */
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import cx from 'classnames';
 
@@ -22,34 +22,34 @@ const Task = React.memo(({ task, isLastChild = false }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
-	const [isHovered, setIsHovered] = React.useState(false);
-	const [isEditable, setIsEditable] = React.useState(false);
+	const [isHovered, setIsHovered] = useState(false);
+	const [isEditable, setIsEditable] = useState(false);
 
-	const mouseEnterHandler = React.useCallback(() => {
+	const mouseEnterHandler = () => {
 		setIsHovered(true);
-	}, []);
+	};
 
-	const mouseLeaveHandler = React.useCallback(() => {
+	const mouseLeaveHandler = () => {
 		setIsHovered(false);
-	}, []);
+	};
 
-	const editHandler = React.useCallback(() => {
+	const editHandler = () => {
 		setIsEditable(!isEditable);
 		mouseLeaveHandler();
-	}, [isEditable, mouseLeaveHandler]);
+	};
 
-	const completeHandler = React.useCallback(() => {
+	const completeHandler = useCallback(() => {
 		dispatch(updateTask(task._id, { ...task, completed: !task.completed }));
 	}, [dispatch, task]);
 
-	const saveHandler = React.useCallback(
+	const saveHandler = useCallback(
 		value => {
 			dispatch(updateTask(task._id, { ...task, description: value }));
 		},
 		[dispatch, task]
 	);
 
-	const deleteHandler = React.useCallback(() => {
+	const deleteHandler = useCallback(() => {
 		dispatch(deleteTask(task._id));
 	}, [dispatch, task._id]);
 

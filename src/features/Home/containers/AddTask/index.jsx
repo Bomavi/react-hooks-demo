@@ -1,5 +1,5 @@
 /* npm imports: common */
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 /* root imports: view components */
@@ -11,13 +11,13 @@ import { createTask } from 'actions/tasks';
 /* local imports: common */
 // import { useStyles } from './styles';
 
-const AddTask = React.memo(() => {
+const AddTask = () => {
 	// const classes = useStyles();
 	const dispatch = useDispatch();
 
 	const inProgress = useSelector(state => state.tasks.inProgress);
 
-	const actionHandler = React.useCallback(
+	const actionHandler = useCallback(
 		value => {
 			if (value) {
 				dispatch(createTask({ description: value, completed: false }));
@@ -38,6 +38,6 @@ const AddTask = React.memo(() => {
 			onClick={actionHandler}
 		/>
 	);
-});
+};
 
 export { AddTask };

@@ -8,11 +8,11 @@ import Container from '@material-ui/core/Container';
 import { TaskList } from './containers';
 import { ActionTabs } from './components';
 
-const Home = React.memo(() => (
+const Home = () => (
 	<Container maxWidth="md">
 		<ActionTabs />
 		<TaskList />
 	</Container>
-));
+);
 
 export { Home };

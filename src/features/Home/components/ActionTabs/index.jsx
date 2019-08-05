@@ -12,7 +12,7 @@ import { AddTask, Search } from 'features/Home/containers';
 /* local imports: common */
 import { useStyles } from './styles';
 
-const ActionTabs = React.memo(() => {
+const ActionTabs = () => {
 	const classes = useStyles();
 
 	const [tabIndex, setTabIndex] = React.useState(0);
@@ -38,6 +38,6 @@ const ActionTabs = React.memo(() => {
 			</div>
 		</Paper>
 	);
-});
+};
 
 export { ActionTabs };
