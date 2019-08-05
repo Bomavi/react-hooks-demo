@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { GuestForm, LoginForm } from './containers';
 import { useStyles } from './styles';
 
-const Login = React.memo(() => {
+const Login = () => {
 	const classes = useStyles();
 
 	return (
@@ -21,6 +21,6 @@ const Login = React.memo(() => {
 			<LoginForm />
 		</Container>
 	);
-});
+};
 
 export { Login };

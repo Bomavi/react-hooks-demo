@@ -1,5 +1,5 @@
 /* npm imports: common */
-import React from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 /* npm imports: material-ui/core */
@@ -21,62 +21,56 @@ const LoginForm = React.memo(() => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
-	const [tabIndex, setTabIndex] = React.useState(0);
-	const [username, setUsername] = React.useState('');
-	const [password, setPassword] = React.useState('');
-	const [repeatPassword, setRepeatPassword] = React.useState('');
+	const [tabIndex, setTabIndex] = useState(0);
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+	const [repeatPassword, setRepeatPassword] = useState('');
 
-	const isPasswordCorrect = React.useMemo(() => password === repeatPassword, [
+	const isPasswordCorrect = useMemo(() => password === repeatPassword, [
 		password,
 		repeatPassword,
 	]);
 
-	const isLoginReady = React.useMemo(() => !!username && !!password, [
-		password,
-		username,
-	]);
+	const isLoginReady = useMemo(() => !!username && !!password, [password, username]);
 
-	const isRegistrationReady = React.useMemo(() => isLoginReady && isPasswordCorrect, [
+	const isRegistrationReady = useMemo(() => isLoginReady && isPasswordCorrect, [
 		isLoginReady,
 		isPasswordCorrect,
 	]);
 
-	const tabClickHandler = React.useCallback((e, value) => {
+	const tabClickHandler = useCallback((e, value) => {
 		setTabIndex(value);
 	}, []);
 
-	const usernameChangeHandler = React.useCallback(e => {
-		const { value } = e.target;
-		setUsername(value);
+	const usernameChangeHandler = useCallback(({ target }) => {
+		setUsername(target.value);
 	}, []);
 
-	const passwordChangeHandler = React.useCallback(e => {
-		const { value } = e.target;
-		setPassword(value);
+	const passwordChangeHandler = useCallback(({ target }) => {
+		setPassword(target.value);
 	}, []);
 
-	const repeatPasswordChangeHandler = React.useCallback(e => {
-		const { value } = e.target;
-		setRepeatPassword(value);
+	const repeatPasswordChangeHandler = useCallback(({ target }) => {
+		setRepeatPassword(target.value);
 	}, []);
 
-	const loginHandler = React.useCallback(() => {
+	const loginHandler = () => {
 		const userData = {
 			username,
 			password,
 		};
 
 		if (isLoginReady) dispatch(login(userData));
-	}, [dispatch, isLoginReady, password, username]);
+	};
 
-	const registrationHandler = React.useCallback(() => {
+	const registrationHandler = () => {
 		const userData = {
 			username,
 			password,
 		};
 
 		if (isRegistrationReady) dispatch(register(userData));
-	}, [dispatch, isRegistrationReady, password, username]);
+	};
 
 	return (
 		<Paper className={classes.paper}>

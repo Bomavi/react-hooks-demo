@@ -1,5 +1,5 @@
 /* npm imports: common */
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 /* npm imports: material-ui/core */
@@ -16,7 +16,7 @@ const GuestForm = React.memo(() => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
-	const loginHandler = React.useCallback(() => {
+	const loginHandler = useCallback(() => {
 		dispatch(login({ isGuest: true }));
 	}, [dispatch]);
 

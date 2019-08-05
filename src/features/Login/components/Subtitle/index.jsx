@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 /* local imports: common */
 import { useStyles } from './styles';
 
-const Subtitle = React.memo(({ children }) => {
+const Subtitle = ({ children }) => {
 	const classes = useStyles();
 
 	return (
@@ -20,6 +20,6 @@ const Subtitle = React.memo(({ children }) => {
 			{children}
 		</Typography>
 	);
-});
+};
 
 export { Subtitle };
