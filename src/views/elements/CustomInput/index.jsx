@@ -37,20 +37,25 @@ const CustomInput = React.memo(
 			return !trimedValue || trimedValue === defaultValue;
 		}, [defaultValue, trimedValue]);
 
+		const value = React.useMemo(() => inputValue || defaultValue || inputValue, [
+			defaultValue,
+			inputValue,
+		]);
+
 		const changeHandler = e => {
 			const { value } = e.target;
 
 			setInputValue(value);
 		};
 
+		const clearHandler = React.useCallback(() => {
+			setInputValue('');
+		}, []);
+
 		const actionClickHandler = () => {
 			if (onClick) onClick(trimedValue);
 			if (onCancel) onCancel();
 			clearHandler();
-		};
-
-		const clearHandler = () => {
-			setInputValue('');
 		};
 
 		const keyPressHandler = e => {
@@ -63,15 +68,9 @@ const CustomInput = React.memo(
 			if (e.key === 'Escape' && onCancel) onCancel();
 		};
 
-		const changeCallbackHandler = React.useCallback(() => {
+		React.useEffect(() => {
 			if (onChange) onChange(trimedValue);
 		}, [onChange, trimedValue]);
-
-		React.useEffect(() => {
-			changeCallbackHandler();
-		}, [changeCallbackHandler, inputValue]);
-
-		const value = inputValue || defaultValue || inputValue;
 
 		return (
 			<div className={classes.root}>
