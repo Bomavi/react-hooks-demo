@@ -26,6 +26,7 @@ const CustomInput = React.memo(
 		onChange,
 	}) => {
 		const classes = useStyles();
+
 		const [inputValue, setInputValue] = React.useState('');
 
 		const trimedValue = React.useMemo(() => {
@@ -66,11 +67,11 @@ const CustomInput = React.memo(
 			if (onChange) onChange(trimedValue);
 		}, [onChange, trimedValue]);
 
-		const value = inputValue || defaultValue || inputValue;
-
 		React.useEffect(() => {
 			changeCallbackHandler();
 		}, [changeCallbackHandler, inputValue]);
+
+		const value = inputValue || defaultValue || inputValue;
 
 		return (
 			<div className={classes.root}>
