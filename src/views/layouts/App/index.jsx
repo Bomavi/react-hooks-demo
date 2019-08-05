@@ -1,5 +1,5 @@
 /* npm imports: common */
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 /* npm imports: material-ui/core */
@@ -17,17 +17,15 @@ import { getSelectedTheme } from 'selectors';
 /* local imports: common */
 import { useStyles } from './styles';
 
-const App = React.memo(() => {
+const App = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
 	const selectedTheme = useSelector(state => getSelectedTheme(state));
 
-	const authenticateHandler = React.useCallback(() => dispatch(authenticate()), [
-		dispatch,
-	]);
+	const authenticateHandler = useCallback(() => dispatch(authenticate()), [dispatch]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		authenticateHandler();
 	}, [authenticateHandler]);
 
@@ -43,6 +41,6 @@ const App = React.memo(() => {
 			</>
 		</ThemeProvider>
 	);
-});
+};
 
 export { App };

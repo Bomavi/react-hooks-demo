@@ -11,7 +11,7 @@ import { getIsAuthenticated } from 'selectors';
 /* local imports: common */
 import { useStyles } from './styles';
 
-const Content = React.memo(({ children }) => {
+const Content = ({ children }) => {
 	const classes = useStyles();
 
 	const isAuthenticated = useSelector(state => getIsAuthenticated(state));
@@ -25,6 +25,6 @@ const Content = React.memo(({ children }) => {
 			<Footer />
 		</>
 	);
-});
+};
 
 export { Content };

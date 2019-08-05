@@ -1,5 +1,5 @@
 /* npm imports: common */
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 /* npm imports: material-ui/core */
@@ -17,7 +17,7 @@ import { toggleDrawer } from 'actions/ui';
 import { useStyles } from './styles';
 import { DrawerItem } from './DrawerItem';
 
-const Drawer = React.memo(() => {
+const Drawer = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
@@ -26,19 +26,18 @@ const Drawer = React.memo(() => {
 	const theme = useSelector(state => state.auth.theme);
 	const themeNameToSwitch = useSelector(state => getThemeNameToSwitch(state));
 
-	const logoutHandler = React.useCallback(() => dispatch(logout()), [dispatch]);
+	const logoutHandler = useCallback(() => dispatch(logout()), [dispatch]);
 
-	const switchThemeHandler = React.useCallback(
+	const switchThemeHandler = useCallback(
 		() => dispatch(switchTheme({ theme: themeNameToSwitch })),
 		[dispatch, themeNameToSwitch]
 	);
 
-	const toggleDrawerHandler = React.useCallback(
-		payload => dispatch(toggleDrawer(payload)),
-		[dispatch]
-	);
+	const toggleDrawerHandler = useCallback(payload => dispatch(toggleDrawer(payload)), [
+		dispatch,
+	]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		return () => {
 			toggleDrawerHandler(false);
 		};
@@ -66,6 +65,6 @@ const Drawer = React.memo(() => {
 			</List>
 		</MUIDrawer>
 	);
-});
+};
 
 export { Drawer };

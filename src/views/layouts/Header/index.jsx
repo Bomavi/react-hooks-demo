@@ -1,5 +1,5 @@
 /* npm imports: common */
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 /* npm imports: material-ui/core */
@@ -17,15 +17,13 @@ import { toggleDrawer } from 'actions/ui';
 /* local imports: common */
 import { useStyles } from './styles';
 
-const Header = React.memo(() => {
+const Header = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
 	const user = useSelector(state => state.auth.user);
 
-	const toggleDrawerHandler = React.useCallback(() => dispatch(toggleDrawer()), [
-		dispatch,
-	]);
+	const toggleDrawerHandler = useCallback(() => dispatch(toggleDrawer()), [dispatch]);
 
 	return (
 		<AppBar position="fixed" className={classes.appBar}>
@@ -51,6 +49,6 @@ const Header = React.memo(() => {
 			</Toolbar>
 		</AppBar>
 	);
-});
+};
 
 export { Header };
