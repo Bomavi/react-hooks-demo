@@ -3,7 +3,7 @@ import * as types from './../types';
 
 /* root imports: common */
 import { services } from 'config/services';
-import { setThemeInProgress } from 'actions/theme';
+// import { setThemeInProgress } from 'actions/theme';
 
 export const updateUserOnSuccess = payload => ({
 	type: types.UPDATE_USER_ON_SUCCESS,
@@ -17,7 +17,7 @@ export const updateUserOnFail = error => ({
 });
 
 export const updateUser = payload => async (dispatch, getState) => {
-	dispatch(setThemeInProgress(true));
+	// dispatch(setThemeInProgress(true));
 
 	try {
 		const state = getState();
@@ -31,6 +31,6 @@ export const updateUser = payload => async (dispatch, getState) => {
 	} catch (e) {
 		dispatch(updateUserOnFail(e.message));
 	} finally {
-		dispatch(setThemeInProgress(false));
+		// dispatch(setThemeInProgress(false));
 	}
 };
