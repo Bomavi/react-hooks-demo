@@ -6,9 +6,8 @@ import { history } from 'config/history';
 import { services } from 'config/services';
 import { setInProgress } from 'actions/auth';
 
-export const logoutOnSuccess = id => ({
+export const logoutOnSuccess = () => ({
 	type: types.LOGOUT_ON_SUCCESS,
-	payload: id,
 });
 
 export const logoutOnFail = error => ({
