@@ -1,5 +1,4 @@
 /* root imports: common */
-import { themeValidator } from 'utils/helpers';
 import * as authTypes from 'actions/auth/types';
 import * as userTypes from 'actions/user/types';
 import * as themeTypes from 'actions/theme/types';
@@ -30,22 +29,8 @@ export const auth = (state = initialState, action) => {
 		}
 
 		case types.SET_IS_INITIALIZED: {
-			const localThemeType = localStorage.getItem('theme');
-			let selectedThemeType;
-
-			if (localThemeType && themeValidator(localThemeType)) {
-				selectedThemeType = localThemeType;
-			} else {
-				selectedThemeType = state.theme.selectedThemeType;
-				localStorage.setItem('theme', state.theme.selectedThemeType);
-			}
-
 			return {
 				...state,
-				theme: {
-					...state.theme,
-					selectedThemeType,
-				},
 				isInitialized: action.payload,
 			};
 		}
@@ -54,7 +39,6 @@ export const auth = (state = initialState, action) => {
 		case types.LOGIN_ON_SUCCESS:
 		case types.REGISTER_ON_SUCCESS:
 		case types.UPDATE_USER_ON_SUCCESS: {
-			localStorage.setItem('theme', action.payload.theme);
 			return {
 				...state,
 				user: {
