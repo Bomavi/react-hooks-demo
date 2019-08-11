@@ -1,11 +1,15 @@
 /* npm imports: common */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* npm imports: material-ui/core */
 import IconButton from '@material-ui/core/IconButton';
 
-/* root imports: common */
+/* root imports: view components */
 import { Icon } from 'views/elements';
+
+/* root imports: common */
+import { SortShape } from 'utils/shapes';
 
 /* local imports: common */
 import { useStyles } from './styles';
@@ -31,5 +35,11 @@ const SortButton = React.memo(({ sortKey, disabled, onClick }) => {
 		</div>
 	);
 });
+
+SortButton.propTypes = {
+	sortKey: SortShape.isRequired,
+	disabled: PropTypes.bool,
+	onClick: PropTypes.func.isRequired,
+};
 
 export { SortButton };
