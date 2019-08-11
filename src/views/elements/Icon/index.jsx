@@ -4,11 +4,12 @@ import cx from 'classnames';
 
 /* root imports: common */
 import HELP from 'assets/icons/help';
+import { IconShape } from 'utils/shapes';
 
 /* local imports: common */
 import { useStyles } from './styles';
 
-const Icon = React.memo(({ name, size = 'sm', svgSize = 'sm', color }) => {
+const Icon = React.memo(({ name, size, svgSize, color }) => {
 	const SVG = React.lazy(() => import(`assets/icons/${name}`));
 	const classes = useStyles({ color });
 
@@ -22,5 +23,12 @@ const Icon = React.memo(({ name, size = 'sm', svgSize = 'sm', color }) => {
 		</div>
 	);
 });
+
+Icon.propTypes = IconShape;
+
+Icon.defaultProps = {
+	size: 'sm',
+	svgSize: 'sm',
+};
 
 export { Icon };
