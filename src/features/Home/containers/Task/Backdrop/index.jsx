@@ -1,5 +1,6 @@
 /* npm imports: common */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* npm imports: material-ui/core */
 import ButtonBase from '@material-ui/core/ButtonBase';
@@ -17,5 +18,10 @@ const Backdrop = React.memo(({ fadeIn, onClick }) => {
 		</Fade>
 	);
 });
+
+Backdrop.propTypes = {
+	fadeIn: PropTypes.bool.isRequired,
+	onClick: PropTypes.func,
+};
 
 export { Backdrop };
