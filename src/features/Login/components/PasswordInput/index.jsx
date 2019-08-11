@@ -1,5 +1,6 @@
 /* npm imports: common */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* npm imports: material-ui/core */
 import TextField from '@material-ui/core/TextField';
@@ -25,5 +26,9 @@ const PasswordInput = React.memo(({ repeatPassword, ...props }) => {
 		/>
 	);
 });
+
+PasswordInput.propTypes = {
+	repeatPassword: PropTypes.bool,
+};
 
 export { PasswordInput };
