@@ -1,5 +1,6 @@
 /* npm imports: common */
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 /* npm imports: material-ui/core */
@@ -9,6 +10,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 /* root imports: view components */
 import { Icon } from 'views/elements';
 
+/* root imports: common */
+import { IconShape } from 'utils/shapes';
+
 /* local imports: common */
 import { useStyles } from './styles';
 
@@ -17,8 +21,8 @@ const InputButton = React.memo(
 		icon: { name: iconName, svgSize = 'sm' },
 		title,
 		disabled,
-		isFetching = false,
-		color = 'inherit',
+		isFetching,
+		color,
 		onClick,
 	}) => {
 		const classes = useStyles();
@@ -54,5 +58,19 @@ const InputButton = React.memo(
 		);
 	}
 );
+
+InputButton.propTypes = {
+	icon: PropTypes.shape(IconShape).isRequired,
+	title: PropTypes.string,
+	disabled: PropTypes.bool,
+	isFetching: PropTypes.bool,
+	color: PropTypes.string,
+	onClick: PropTypes.func,
+};
+
+InputButton.defaultProps = {
+	isFetching: false,
+	color: 'inherit',
+};
 
 export { InputButton };
