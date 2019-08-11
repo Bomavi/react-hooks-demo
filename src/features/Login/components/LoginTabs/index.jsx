@@ -1,5 +1,6 @@
 /* npm imports: common */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* npm imports: material-ui/core */
 import Tabs from '@material-ui/core/Tabs';
@@ -23,5 +24,10 @@ const LoginTabs = React.memo(({ tabIndex, onChange }) => {
 		</Tabs>
 	);
 });
+
+LoginTabs.propTypes = {
+	tabIndex: PropTypes.number.isRequired,
+	onChange: PropTypes.func.isRequired,
+};
 
 export { LoginTabs };
