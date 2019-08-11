@@ -31,7 +31,7 @@ describe('Dispatch thunk: LOGOUT', () => {
 		const actions = store.getActions();
 		const toEqual = [
 			setInProgress(true),
-			logoutOnFail('Error: Network Error'),
+			logoutOnFail('Network Error'),
 			setInProgress(false),
 		];
 

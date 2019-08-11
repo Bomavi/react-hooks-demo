@@ -30,10 +30,7 @@ describe('Dispatch thunk: AUTHENTICATE', () => {
 		await store.dispatch(authenticate());
 
 		const actions = store.getActions();
-		const toEqual = [
-			authenticateOnFail('Error: Network Error'),
-			setIsInitialized(true),
-		];
+		const toEqual = [authenticateOnFail('Network Error'), setIsInitialized(true)];
 
 		expect(actions).toEqual(toEqual);
 	});

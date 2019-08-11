@@ -29,7 +29,7 @@ describe('Dispatch thunk: UPDATE_USER', () => {
 		await store.dispatch(updateUser(user));
 
 		const actions = store.getActions();
-		const toEqual = [updateUserOnFail('Error: Network Error')];
+		const toEqual = [updateUserOnFail('Network Error')];
 
 		expect(actions).toEqual(toEqual);
 	});

@@ -33,7 +33,7 @@ describe('Dispatch thunk: DELETE_TASK', () => {
 		const actions = store.getActions();
 		const toEqual = [
 			setDeleteInProgress(taskId, true),
-			deleteTaskOnFail('Error: Network Error'),
+			deleteTaskOnFail('Network Error'),
 			setDeleteInProgress(taskId, false),
 		];
 

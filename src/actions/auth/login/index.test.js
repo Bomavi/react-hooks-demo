@@ -32,7 +32,7 @@ describe('Dispatch thunk: LOGIN', () => {
 		const actions = store.getActions();
 		const toEqual = [
 			setInProgress(true),
-			loginOnFail('Error: Network Error'),
+			loginOnFail('Network Error'),
 			setInProgress(false),
 		];
 

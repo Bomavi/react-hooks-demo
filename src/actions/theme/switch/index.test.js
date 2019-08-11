@@ -33,7 +33,7 @@ describe('Dispatch thunk: SWITCH_THEME', () => {
 		const actions = store.getActions();
 		const toEqual = [
 			setThemeInProgress(true),
-			updateUserOnFail('Error: Network Error'),
+			updateUserOnFail('Network Error'),
 			setThemeInProgress(false),
 		];
 

@@ -32,7 +32,7 @@ describe('Dispatch thunk: REGISTER', () => {
 		const actions = store.getActions();
 		const toEqual = [
 			setInProgress(true),
-			registerOnFail('Error: Network Error'),
+			registerOnFail('Network Error'),
 			setInProgress(false),
 		];
 

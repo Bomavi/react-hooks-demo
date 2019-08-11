@@ -32,7 +32,7 @@ describe('Dispatch thunk: CREATE_TASK', () => {
 		const actions = store.getActions();
 		const toEqual = [
 			setInProgress(true),
-			createTaskOnFail('Error: Network Error'),
+			createTaskOnFail('Network Error'),
 			setInProgress(false),
 		];
 

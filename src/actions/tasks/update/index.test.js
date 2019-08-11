@@ -37,7 +37,7 @@ describe('Dispatch thunk: UPDATE_TASK', () => {
 		const actions = store.getActions();
 		const toEqual = [
 			setUpdateInProgress(taskId, true),
-			updateTaskOnFail('Error: Network Error'),
+			updateTaskOnFail('Network Error'),
 			setUpdateInProgress(taskId, false),
 		];
 

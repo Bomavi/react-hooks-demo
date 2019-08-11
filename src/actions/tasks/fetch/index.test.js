@@ -32,7 +32,7 @@ describe('Dispatch thunk: FETCH_TASKS', () => {
 		const actions = store.getActions();
 		const toEqual = [
 			setIsFetching(true),
-			fetchTasksOnFail('Error: Network Error'),
+			fetchTasksOnFail('Network Error'),
 			setIsFetching(false),
 		];
 
