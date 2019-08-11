@@ -5,9 +5,9 @@ import MockAdapter from 'axios-mock-adapter';
 /* root imports: common */
 import { handleErrorLogger } from 'utils/helpers';
 
-export const mockServerResponse = (apiPrefix, schema) => {
-	const mock = new MockAdapter(axios);
+const mock = new MockAdapter(axios);
 
+export const mockServerResponse = (apiPrefix, schema) => {
 	return {
 		initSuccessResponse() {
 			for (const req of schema) {
