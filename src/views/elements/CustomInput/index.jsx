@@ -1,5 +1,6 @@
 /* npm imports: common */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* npm imports: material-ui/core */
 import InputBase from '@material-ui/core/InputBase';
@@ -10,6 +11,7 @@ import { InputButton } from 'views/elements';
 
 /* root imports: common */
 import { removeSpaces } from 'utils/helpers';
+import { IconShape } from 'utils/shapes';
 
 /* local imports: common */
 import { useStyles } from './styles';
@@ -19,8 +21,8 @@ const CustomInput = React.memo(
 		icon,
 		placeholder,
 		defaultValue,
-		isFetching = false,
-		autoFocus = false,
+		isFetching,
+		autoFocus,
 		onClick,
 		onCancel,
 		onChange,
@@ -112,5 +114,21 @@ const CustomInput = React.memo(
 		);
 	}
 );
+
+CustomInput.propTypes = {
+	icon: PropTypes.shape(IconShape),
+	placeholder: PropTypes.string,
+	defaultValue: PropTypes.string,
+	isFetching: PropTypes.bool,
+	autoFocus: PropTypes.bool,
+	onClick: PropTypes.func,
+	onCancel: PropTypes.func,
+	onChange: PropTypes.func,
+};
+
+CustomInput.defaultProps = {
+	isFetching: false,
+	autoFocus: false,
+};
 
 export { CustomInput };
