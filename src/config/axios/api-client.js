@@ -71,17 +71,7 @@ export class ApiClient {
 			});
 			return response.data;
 		} catch (e) {
-			const response = e.response;
-			if (!response) {
-				console.error(e);
-				throw Error(e);
-			}
-			if (response.status >= 400) {
-				const serverError = e;
-				serverError.res = response;
-				throw serverError;
-			}
-			return e;
+			throw e;
 		}
 	}
 }
