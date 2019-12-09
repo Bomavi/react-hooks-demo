@@ -35,10 +35,10 @@ const Task = React.memo(({ task, isLastChild }) => {
 		setIsHovered(false);
 	};
 
-	const editHandler = () => {
+	const editHandler = useCallback(() => {
 		setIsEditable(!isEditable);
 		mouseLeaveHandler();
-	};
+	}, [isEditable]);
 
 	const completeHandler = useCallback(() => {
 		dispatch(updateTask(task._id, { ...task, completed: !task.completed }));
