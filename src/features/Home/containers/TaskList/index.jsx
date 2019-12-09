@@ -18,7 +18,13 @@ import { getSortedTasks, getTasksIsEmpty, getTasksLenth } from 'selectors';
 /* local imports: common */
 import { useStyles } from './styles';
 
-const TaskList = () => {
+const spring = {
+	type: 'spring',
+	damping: 50,
+	stiffness: 500,
+};
+
+const TaskList = React.memo(() => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
@@ -53,13 +59,13 @@ const TaskList = () => {
 			</div>
 			{!isEmpty
 				? tasks.map((task, i) => (
-						<motion.div key={task._id} positionTransition>
+						<motion.div key={task._id} positionTransition={spring}>
 							<Task task={task} isLastChild={tasksLength === i + 1} />
 						</motion.div>
 				  ))
 				: 'no tasks'}
 		</Paper>
 	);
-};
+});
 
 export { TaskList };
